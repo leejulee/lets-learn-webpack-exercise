@@ -147,3 +147,55 @@
         - build webpack `yarn run build`
     - webpack watch 
         - modify package.json add `"watch": "webpack --watch"` to **scripts**
+    - add [postcss-loader](https://doc.webpack-china.org/loaders/postcss-loader/)
+        - [PostCSS plugins](https://www.postcss.parts/)
+        - `yarn add -D postcss-loader`
+        - add file `postcss.config.js`
+        ```
+        module.exports = {
+            plugins: {
+                'rucksack-css': {},
+                'lost': {},
+                'autoprefixer': {},
+                'cssnano': {}
+            }
+        }        
+        ```
+        - `yarn add -D rucksack-css lost autoprefixer cssnano`
+        - modify file **webpack.config.js** update postcss-loader to rules
+        ```
+        rules: [
+                {
+                    test: /\.css$/,
+                    use: [
+                        'style-loader',
+                        'css-loader',
+                        'postcss-loader'
+                    ]
+                },
+                {
+                    test: /\.scss$/,
+                    use: [
+                        { loader: 'style-loader' },
+                        { loader: 'css-loader' },
+                        { loader: 'postcss-loader' },
+                        { loader: 'sass-loader' }
+                    ]
+                },
+                ......
+        ```
+        - [Rucksack](https://www.rucksackcss.org/docs/#responsive-type)
+        - modify file
+            - **src/index.js** add `import './scss/main.scss'`
+            - **src/main.scss** add `p {font-size: responsive;}`
+            - build webpack `yarn run build`
+    - add [browserslist](https://github.com/ai/browserslist#queries)
+        - modify **package.json** add browserlist
+        ```
+        "browserlist": [
+            "> 1%",
+            "last 2 versions"
+        ]
+        ```
+        - build webpack `yarn run build`
+

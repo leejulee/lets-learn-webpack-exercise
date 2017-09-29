@@ -198,4 +198,8 @@
         ]
         ```
         - build webpack `yarn run build`
+    - add [extract-text-webpack-plugin](https://doc.webpack-china.org/plugins/extract-text-webpack-plugin/)
+        - `yarn add -D extract-text-webpack-plugin`
+        
+
 

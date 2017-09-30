@@ -48,7 +48,14 @@ module.exports = {
         new CleanWebPackPlugin(['dist']),
         new ExtractTextPlugin('styles.css'),
         new HtmlWebPackPlugin({
-            title: 'Multiple Bundles!'
+            filename: 'index.html',
+            template: 'src/views/index.html',
+            chunks: ['app']
+        }),
+        new HtmlWebPackPlugin({
+            filename: 'about.html',
+            template: 'src/views/about.html',
+            chunks: ['about']
         }),
         new BrowserSyncPlugin(
             // BrowserSync options

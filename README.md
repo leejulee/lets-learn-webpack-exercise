@@ -361,3 +361,22 @@
             - package.json remove **--open** `"start": "webpack-dev-server"`
             - yarn start
             - <http://localhost:3001> browser sync setting
+    - multi page
+        - modify file **webpack.config.js** chunks mapping entry.key
+        ```
+        new HtmlWebPackPlugin({
+            filename: 'index.html',
+            template: 'src/views/index.html',
+            chunks: ['app']
+        }),
+        new HtmlWebPackPlugin({
+            filename: 'about.html',
+            template: 'src/views/about.html',
+            chunks: ['about']
+        })    
+        ```
+        - `yarn run build`
+    - resource
+        - [html-webpack-plugin configuration](https://github.com/jantimon/html-webpack-plugin#configuration) 
+        - [How to Refresh Your Pages Automatically with Webpack and Browsersync](https://youtu.be/hB2YBV7w43s)
+        - [externals](https://webpack.js.org/configuration/externals/)

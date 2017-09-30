@@ -322,3 +322,10 @@
                 })
             ]
             ```
+    - webpack server
+        - `yarn add -D webpack-dev-server`
+        - modify file 
+            - **webpack.config.js** add parameter `devServer: {contentBase: './dist'}`
+            - **package.json** add `"start": "webpack-dev-server --open"` to scripts
+        - yarn start
+    

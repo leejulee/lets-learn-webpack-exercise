@@ -1,10 +1,15 @@
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const HtmlWebPackPlugin = require('html-webpack-plugin');
+const CleanWebPackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
-    entry: './src/index.js',
+    entry: {
+        app: './src/index.js',
+        about: './src/js/about.js',
+    },
     output: {
-        filename: 'bundle.js',
+        filename: '[name].bundle.js',
         path: path.resolve(__dirname, 'dist')
     },
     devtool: 'inline-source-map',
@@ -36,6 +41,10 @@ module.exports = {
         ]
     },
     plugins: [
-        new ExtractTextPlugin('styles.css')
+        new CleanWebPackPlugin(['dist']),
+        new ExtractTextPlugin('styles.css'),
+        new HtmlWebPackPlugin({
+            title: 'Multiple Bundles!'
+        })
     ]
 }

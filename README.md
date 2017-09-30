@@ -229,6 +229,7 @@
             <link rel="stylesheet" href="styles.css">
             ```
     - **enable sourcemaps** modify file
+        - [using-source-maps](https://webpack.js.org/guides/development/#using-source-maps)
         - **webpack.config.js** add parameter `devtool: 'inline-source-map',`
         - add file 
             - hello.js
@@ -279,3 +280,45 @@
             }
             ```
         - build webpack `yarn run build`
+    - multiple bundles
+        - [Output Management](https://webpack.js.org/guides/output-management/)
+        - modify file
+            - webpack.config.js modify entry & bundle name (`[name]`maping entry key ex: app->app.bundle.js)
+            ```
+            entry:  {
+                app: './src/index.js',
+                about: './src/js/about.js',
+            },            
+            ```
+            ```
+            output: {
+                filename: '[name]bundle.js',
+                path: path.resolve(__dirname, 'dist')
+            },
+            ```
+        - build webpack `yarn run build`
+        - `yarn add -D html-webpack-plugin`
+            - modify file **webpack.config.js** add **HtmlWebPackPlugin** to plugins
+            `const HtmlWebPackPlugin = require('html-webpack-plugin');`
+            ```
+            plugins: [
+                new ExtractTextPlugin('styles.css'),
+                new HtmlWebPackPlugin({
+                    title: 'Multiple Bundles!'
+                })
+            ]
+            ```
+            - delete index.html file
+            - build webpack `yarn run build` (auto create index.html)
+        - `yarn add -D clean-webpack-plugin`
+            - modify file **webpack.config.js** add **CleanWebPackPlugin** to plugins
+            `const CleanWebPackPlugin = require('clean-webpack-plugin');`
+            ```
+            plugins: [
+                new CleanWebPackPlugin(['dist']),
+                new ExtractTextPlugin('styles.css'),
+                new HtmlWebPackPlugin({
+                    title: 'Multiple Bundles!'
+                })
+            ]
+            ```

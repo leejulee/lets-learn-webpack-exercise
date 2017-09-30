@@ -323,9 +323,41 @@
             ]
             ```
     - webpack server
+        - [webpack-dev-server](https://webpack.js.org/guides/development/#using-webpack-dev-server)
         - `yarn add -D webpack-dev-server`
         - modify file 
             - **webpack.config.js** add parameter `devServer: {contentBase: './dist'}`
             - **package.json** add `"start": "webpack-dev-server --open"` to scripts
         - yarn start
-    
+    - browsersync proxy
+        - [browsersync](https://www.browsersync.io/)
+        - [browser-sync-webpack-plugin](https://github.com/Va1/browser-sync-webpack-plugin)
+        - `yarn add -D browser-sync browser-sync-webpack-plugin`
+        - modify file 
+            - webpack.config.js
+            `const BrowserSyncPlugin = require('browser-sync-webpack-plugin');`
+            ```
+            plugins: [
+                new BrowserSyncPlugin(
+                // BrowserSync options
+                {
+                    // browse to http://localhost:3000/ during development
+                    host: 'localhost',
+                    port: 3000,
+                    // proxy the Webpack Dev Server endpoint
+                    // (which should be serving on http://localhost:3100/)
+                    // through BrowserSync
+                    proxy: 'http://localhost:3100/'
+                },
+                // plugin options
+                {
+                    // prevent BrowserSync from reloading the page
+                    // and let Webpack Dev Server take care of this
+                    reload: false
+                }
+                )
+            ] 
+            ```
+            - package.json remove **--open** `"start": "webpack-dev-server"`
+            - yarn start
+            - <http://localhost:3001> browser sync setting

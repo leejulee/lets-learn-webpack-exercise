@@ -1,8 +1,6 @@
+@import 'typography.scss';
+
 $blue : gray;
 body{
     background: $blue;
-}
-
-p{
-font-size: responsive;
 }

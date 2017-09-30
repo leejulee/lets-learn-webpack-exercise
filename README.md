@@ -228,3 +228,54 @@
             ```
             <link rel="stylesheet" href="styles.css">
             ```
+    - **enable sourcemaps** modify file
+        - **webpack.config.js** add parameter `devtool: 'inline-source-map',`
+        - add file 
+            - hello.js
+            ```
+            function hello() {
+                console.log('hello module!')
+            }
+
+            export { hello }            
+            ```
+            - typography.scss `p{font-size: responsive;}`
+        - modify file
+            - module.js
+
+            ```
+            import './scss/main.scss'
+            import { sub } from './js/module';
+            import { hello } from './js/hello';
+
+            hello();
+            sub();
+
+            console.log('webpack watch!');
+            ```
+
+            - main.scss
+
+            ```
+            @import 'typography.scss';
+
+            $blue : gray;
+            body{
+                background: $blue;
+            }
+            ```
+            - webpack.config.js add options parameter to scss rule
+            ```
+            {
+                test: /\.scss$/,
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: [
+                        { loader: 'css-loader', options: { sourceMap: true } },
+                        { loader: 'postcss-loader', options: { sourceMap: true } },
+                        { loader: 'sass-loader', options: { sourceMap: true } }
+                    ]
+                })
+            }
+            ```
+        - build webpack `yarn run build`

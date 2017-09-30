@@ -31,6 +31,6 @@ module.exports = {
         ]
     },
     plugins: [
-        new ExtractTextPlugin('sytles.css')
+        new ExtractTextPlugin('styles.css')
     ]
 }

@@ -200,6 +200,31 @@
         - build webpack `yarn run build`
     - add [extract-text-webpack-plugin](https://doc.webpack-china.org/plugins/extract-text-webpack-plugin/)
         - `yarn add -D extract-text-webpack-plugin`
-        
-
-
+        -  modify file
+            - **webpack.config.js** Use ExtractTextPlugin replace rulues.use & add plugins parameter
+            ```
+            {
+                test: /\.css$/,
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: ['css-loader', 'postcss-loader']
+                })
+            },
+            {
+                test: /\.scss$/,
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: ['css-loader', 'postcss-loader', 'sass-loader']
+                })
+            }
+            ```
+            ```
+            ,
+            plugins: [
+                new ExtractTextPlugin('styles.css') // styles.css output file name
+            ]
+            ```
+            - index.html
+            ```
+            <link rel="stylesheet" href="styles.css">
+            ```
